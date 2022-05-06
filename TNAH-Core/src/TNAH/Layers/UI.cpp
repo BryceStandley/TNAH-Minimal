@@ -3,9 +3,7 @@
 
 #include <glm/gtc/type_ptr.hpp>
 
-#include "ImGuiFileBrowser.h"
 #include "imgui_internal.h"
-#include "Widgets.h"
 
 //***************************************** Variable Controls ******************************************************************
 void tnah::UI::Entry(const char* format, ...)
@@ -1642,31 +1640,11 @@ void tnah::UI::SetDefaultFont(ImFont* font)
 
 //***************************************** Misc Widgets ******************************************************************
 std::string tnah::UI::OpenFileBrowser(const char* browserLabel, const FileBrowserMode& mode, const ImVec2& position, const char* validTypes)
-{
-	imgui_addons::ImGuiFileBrowser browser = imgui_addons::ImGuiFileBrowser();
-	if(mode == FileBrowserMode::Open)
-	{
-		if(browser.showFileDialog(browserLabel, imgui_addons::ImGuiFileBrowser::DialogMode::OPEN, position, validTypes))
-		{
-			return browser.selected_path;
-		}
-
-		return "";
-	}
-
-	if(mode == FileBrowserMode::Save)
-	{
-		if(browser.showFileDialog(browserLabel, imgui_addons::ImGuiFileBrowser::DialogMode::SAVE, position, validTypes))
-		{
-			return browser.selected_path;
-		}
-		return "";
-	}
-	
+{	
 	return "";
 }
 
 void tnah::UI::EntryToggleCheckbox(const char* id, bool& value)
 {
-	ImGui::ToggleButton(id, &value);
+	
 }

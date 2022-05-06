@@ -277,7 +277,7 @@ namespace tnah {
 			std::string error = "Framebuffer minimum dimensions <= 1. \t";
 			error += (errorW ? "Width reset to {0} \t" : "Width = {0} \t");
 			error += (errorH ? "Height reset to {1}" : "Height = {1}");
-			TNAH_CORE_WARN(error, m_Specification.Width, m_Specification.Height);
+			TNAH_CORE_WARN(error.c_str(), m_Specification.Width, m_Specification.Height);
 		}
 		
 		glGenFramebuffers(1, &m_RendererID);

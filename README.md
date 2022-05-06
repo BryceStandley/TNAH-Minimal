@@ -1,31 +1,29 @@
 <p align="center">
-    <img src="./resources/readme/logo/logo.png" alt="TNAH-Logo" width="200" height="90"/>
+    <img src="./TNAH-Core/Resources/readme/logo/logo.png" alt="TNAH-Logo" width="200" height="90"/>
 </p>
 
 <p align="center">
-<a href="https://github.com/BryceStandley/TNAH/actions/workflows/Windows.yml">
-    <img src="https://github.com/BryceStandley/TNAH/actions/workflows/Windows.yml/badge.svg" alt="Windows-Build-Status"/>
-</a>
-<a href="https://github.com/BryceStandley/TNAH/actions/workflows/Mac.yml">
-    <img src="https://github.com/BryceStandley/TNAH/actions/workflows/Mac.yml/badge.svg" alt="Mac-Build-Status"/>
-</a>
-<a href="https://github.com/BryceStandley/TNAH/actions/workflows/Linux.yml">
-    <img src="https://github.com/BryceStandley/TNAH/actions/workflows/Linux.yml/badge.svg" alt="Linux-Build-Status"/>
+<a href="/actions/workflows/Windows.yml">
+    <img src="/actions/workflows/Windows.yml/badge.svg" alt="Windows-Build-Status"/>
 </a>
 </p>
 
 ---
 
 <p align="center">
-    <a href="https://github.com/BryceStandley/TNAH/wiki/">Wiki</a> •
+    <a href="#minimal">Minimal</a> •
+    <a href="./wiki">Wiki</a> •
     <a href="#goals">Goals</a> •
-    <a href="https://brycestandley.github.io/TNAH/">Documentation</a> •
-    <a href="https://github.com/BryceStandley/TNAH/wiki/Build">Build</a> •
+    <a href="./wiki/Build">Build</a> •
     <a href="#dependencies">Dependencies</a> •
-    <a href="https://github.com/BryceStandley/TNAH/LICENSE">License</a>
+    <a href="./LICENSE">License</a>
 </p>
 
 ---
+
+## Minimal
+
+This minimal fork is designed to leverage the core structure and functions of the original engine but strip out some of the more advanced game engine aspects to target more light-weight GUI apps that don't need or require said aspects of the original engine.
 
 ## About
 
@@ -37,18 +35,17 @@ This project originally started development in early 2021 as a university projec
 
 ## Wiki
 
-Visit the [wiki](https://github.com/BryceStandley/TNAH/wiki) to read up on example applications, build instructions and much more! You can also visit our [Documentaion](https://brycestandley.github.io/TNAH/) page to view our [Doxygen](https://www.doxygen.nl/index.html) generated output.
+Visit the [wiki](/wiki/) to read up on example applications, build instructions and much more! You can also visit our [Documentaion](docs/index.html) page to view our [Doxygen](https://www.doxygen.nl/index.html) generated output.
 
 ## Goals
 
 The goal of the TNAH engine is to provide a simple yet powerful application engine not only targeting game development but also any application you can think of! Some goals moving forward:
 
 1. Remove any unnecessary components originally created for the original university build.
-2. Remove frictionless collisions and revert back to using all of ReactPhysics3D for physics simulation.
-3. Major code clean up. (Many corners were cut when deadlines were approching)
-4. Transition the engine to a dynamic library for easy distribution/integration.
-5. Add proper application build runtimes.
-6. Rewrite a large portion of Doxygen comments.
+2. Major code clean up. (Many corners were cut when deadlines were approching)
+3. Transition the engine to a dynamic library for easy distribution/integration.
+4. Add proper application build runtimes.
+5. Rewrite a large portion of Doxygen comments.
 
 ## LFS
 
@@ -97,10 +94,8 @@ The TNAH engine is an ongoing development project which will see additions of ma
 - [ImGui](https://github.com/ocornut/imgui) (GUI Library)
 - [ImGuizmo](https://github.com/CedricGuillemet/ImGuizmo) (Gizmo ImGui Addon)
 - [KTX-Software](https://github.com/KhronosGroup/KTX-Software) (KTX Texture Loader)
-- [Miniaudio](https://github.com/mackron/miniaudio) (2D Audio Library)
-- [ReactPhysics3D](https://github.com/DanielChappuis/reactphysics3d) (3D Physics/Collision Library)
 - [SPDLOG](https://github.com/gabime/spdlog) (Console Logger Library)
 
 ## License
 
-This project is licensed under the MIT license. Please refer to the [License](/LICENSE) file for details.
+This project is licensed under the GNU GPL3 license. Please refer to the [License](/LICENSE) file for details.

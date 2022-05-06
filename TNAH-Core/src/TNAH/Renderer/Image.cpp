@@ -54,16 +54,6 @@ namespace tnah {
     
     }
 
-    ktxTexture* Image::GetKtxData() const
-    {
-        if(m_LoadFormat == ImageLoadFormat::KTX)
-        {
-           // return static_cast<ktxTexture*>(m_ImageData);
-        }
-
-        return nullptr;
-    }
-
     uchar8_t* Image::GetImageData() const
     {
         if(m_LoadFormat == ImageLoadFormat::STB)

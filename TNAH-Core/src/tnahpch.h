@@ -4,11 +4,6 @@
 
 #ifdef TNAH_PLATFORM_WINDOWS
     #include <Windows.h>
-    #ifdef TNAH_BUILD_DLL
-        #define TNAH_API __declspec(dllexport)
-    #else
-        #define TNAH_API __declspec(dllimport)
-    #endif
 #endif
 
 // --- TNAH Precompiled Header File --- //

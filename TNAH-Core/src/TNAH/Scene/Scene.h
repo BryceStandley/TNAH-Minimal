@@ -8,11 +8,9 @@
 #include "TNAH/Core/Timestep.h"
 #include "TNAH/Core/Math.h"
 #include "TNAH/Core/Ref.h"
-#include "TNAH/Physics/PhysicsTimestep.h"
 
 #pragma warning(push, 0)
 #include <entt/entt.hpp>
-#include <reactphysics3d/reactphysics3d.h>
 #pragma warning(pop)
 
 namespace tnah {
@@ -133,18 +131,6 @@ namespace tnah {
 
 		void OnUpdate(Timestep deltaTime);
 
-		/**********************************************************************************************//**
-		 * @fn	void Scene::OnFixedUpdate(PhysicsTimestep deltaTime);
-		 *
-		 * @brief	Executes the 'fixed update' action
-		 *
-		 * @author	Chris
-		 * @date	10/09/2021
-		 *
-		 * @param 	deltaTime	The delta time.
-		 **************************************************************************************************/
-
-		void OnFixedUpdate(Timestep deltaTime, PhysicsTimestep physicsDeltaTime);
 		
 		/**********************************************************************************************//**
 		 * @fn	glm::mat4 Scene::GetTransformRelativeToParent(GameObject gameObject);
@@ -285,7 +271,6 @@ namespace tnah {
 		**************************************************************************************************/
 
 		std::map<UUID, GameObject>& GetGameObjectsInScene();
-		PhysicsTimestep m_PhysicsTime;
 		bool GetPlayerInteraction() { return mPlayerInteractions; }
 		std::string GetTargetString() const { return mTargetString; }private:
 
@@ -428,8 +413,6 @@ namespace tnah {
 		/** @brief	Identifier for the scene */
 		UUID m_SceneID;
 
-		/** @brief	The listener */
-		rp3d::EventListener * listener;
 
 		bool mPlayerInteractions;
 		std::string mTargetString = "";

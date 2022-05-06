@@ -4,8 +4,6 @@
 #pragma warning(push, 0)
 
 #include <string>
-
-#include <ktx.h>
 #pragma warning(pop)
 
 #include "TNAH/Core/Core.h"
@@ -391,18 +389,6 @@ namespace tnah {
 
 		virtual ImageLoadFormat GetLoadFormat() const { return m_LoadFormat; }
 
-		/**
-		 * @fn	virtual ktxTexture* Texture::GetKtxData() const = 0;
-		 *
-		 * @brief	Returns a KTX Texture or nullptr if invalid
-		 *
-		 * @author	Bryce Standley
-		 * @date	12/09/2021
-		 *
-		 * @returns	Null if it fails, else the ktx data.
-		 */
-
-		virtual ktxTexture* GetKtxData() const = 0;
 
 		/**
 		 * @fn	virtual uchar8_t* Texture::GetImageData() const = 0;

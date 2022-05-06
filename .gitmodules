@@ -13,12 +13,11 @@
 [submodule "vendor/spdlog"]
 	path = vendor/spdlog
 	url = https://github.com/gabime/spdlog.git
+	branch = master
 [submodule "vendor/imgui"]
 	path = vendor/imgui
 	url = https://github.com/ocornut/imgui.git
+	branch = docking
 [submodule "vendor/ImGuizmo"]
 	path = vendor/ImGuizmo
 	url = https://github.com/CedricGuillemet/ImGuizmo.git
-[submodule "vendor/KTX-Software"]
-	path = vendor/KTX-Software
-	url = https://github.com/KhronosGroup/KTX-Software.git

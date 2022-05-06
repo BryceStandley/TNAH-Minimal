@@ -38,38 +38,31 @@ namespace tnah {
 }
 
 #ifdef TNAH_DEBUG
-#if defined(TNAH_PLATFORM_WINDOWS)
-#define TNAH_DEBUGBREAK() __debugbreak()
-#elif defined(TNAH_PLATFORM_LINUX)
-#include <signal.h>
-#define TNAH_DEBUGBREAK() raise(SIGTRAP)
-#else
-#error "Platform doesn't support debugbreak yet!"
+	#if defined(TNAH_PLATFORM_WINDOWS)
+		#define TNAH_DEBUGBREAK() __debugbreak()
+	#endif
 #endif
-#define TNAH_ENABLE_ASSERTS
-#else
-#define TNAH_DEBUGBREAK()
-#endif
+
 
 
 
 #ifdef TNAH_ENABLE_ASSERTS
 
-// Alternatively we could use the same "default" message for both "WITH_MSG" and "NO_MSG" and
-// provide support for custom formatting by concatenating the formatting string instead of having the format inside the default message
-#define TNAH_INTERNAL_ASSERT_IMPL(type, check, msg, ...) { if(!(check)) { TNAH##type##ERROR(msg, __VA_ARGS__); TNAH_DEBUGBREAK(); } }
-#define TNAH_INTERNAL_ASSERT_WITH_MSG(type, check, ...) TNAH_INTERNAL_ASSERT_IMPL(type, check, "Assertion failed: {0}", __VA_ARGS__)
-#define TNAH_INTERNAL_ASSERT_NO_MSG(type, check) TNAH_INTERNAL_ASSERT_IMPL(type, check, "Assertion '{0}' failed at {1}:{2}", TNAH_STRINGIFY_MACRO(check), std::filesystem::path(__FILE__).filename().string(), __LINE__)
+	// Alternatively we could use the same "default" message for both "WITH_MSG" and "NO_MSG" and
+	// provide support for custom formatting by concatenating the formatting string instead of having the format inside the default message
+	#define TNAH_INTERNAL_ASSERT_IMPL(type, check, msg, ...) { if(!(check)) { TNAH##type##ERROR(msg, __VA_ARGS__); TNAH_DEBUGBREAK(); } }
+	#define TNAH_INTERNAL_ASSERT_WITH_MSG(type, check, ...) TNAH_INTERNAL_ASSERT_IMPL(type, check, "Assertion failed: {0}", __VA_ARGS__)
+	#define TNAH_INTERNAL_ASSERT_NO_MSG(type, check) TNAH_INTERNAL_ASSERT_IMPL(type, check, "Assertion '{0}' failed at {1}:{2}", TNAH_STRINGIFY_MACRO(check), std::filesystem::path(__FILE__).filename().string(), __LINE__)
 
-#define TNAH_INTERNAL_ASSERT_GET_MACRO_NAME(arg1, arg2, macro, ...) macro
-#define TNAH_INTERNAL_ASSERT_GET_MACRO(...) TNAH_EXPAND_MACRO( TNAH_INTERNAL_ASSERT_GET_MACRO_NAME(__VA_ARGS__, TNAH_INTERNAL_ASSERT_WITH_MSG, TNAH_INTERNAL_ASSERT_NO_MSG) )
+	#define TNAH_INTERNAL_ASSERT_GET_MACRO_NAME(arg1, arg2, macro, ...) macro
+	#define TNAH_INTERNAL_ASSERT_GET_MACRO(...) TNAH_EXPAND_MACRO( TNAH_INTERNAL_ASSERT_GET_MACRO_NAME(__VA_ARGS__, TNAH_INTERNAL_ASSERT_WITH_MSG, TNAH_INTERNAL_ASSERT_NO_MSG) )
 
-// Currently accepts at least the condition and one additional parameter (the message) being optional
-#define TNAH_ASSERT(...) TNAH_EXPAND_MACRO( TNAH_INTERNAL_ASSERT_GET_MACRO(__VA_ARGS__)(_, __VA_ARGS__) )
-#define TNAH_CORE_ASSERT(...) TNAH_EXPAND_MACRO( TNAH_INTERNAL_ASSERT_GET_MACRO(__VA_ARGS__)(_CORE_, __VA_ARGS__) )
+	// Currently accepts at least the condition and one additional parameter (the message) being optional
+	#define TNAH_ASSERT(...) TNAH_EXPAND_MACRO( TNAH_INTERNAL_ASSERT_GET_MACRO(__VA_ARGS__)(_, __VA_ARGS__) )
+	#define TNAH_CORE_ASSERT(...) TNAH_EXPAND_MACRO( TNAH_INTERNAL_ASSERT_GET_MACRO(__VA_ARGS__)(_CORE_, __VA_ARGS__) )
 #else
-#define TNAH_ASSERT(...)
-#define TNAH_CORE_ASSERT(...)
+	#define TNAH_ASSERT(...)
+	#define TNAH_CORE_ASSERT(...)
 #endif
 
 

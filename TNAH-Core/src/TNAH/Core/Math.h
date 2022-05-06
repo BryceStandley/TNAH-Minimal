@@ -9,11 +9,9 @@
 #include <glm/gtx/norm.hpp>
 #include <glm/gtx/quaternion.hpp>
 #include <corecrt_math_defines.h>
-#include <IrrKlang/irrKlang.h>
 
 #include "imgui.h"
 #include "glm/glm.hpp"
-#include "reactphysics3d/reactphysics3d.h"
 #include "TNAH/Scene/Components/Components.h"
 #pragma warning(pop)
 
@@ -131,112 +129,6 @@ namespace tnah {
 		static float Remap(float value, float oldMin, float oldMax, float newMin, float newMax)
 		{
 			return newMin + (newMax - newMin) * ((value - oldMin) / (oldMax - oldMin));
-		}
-
-		/**
-		 * @fn	irrklang::vec3df ConvertVec3ToVec3df(const glm::vec3& other);
-		 *
-		 * @brief	Convert glm vec3 to irrklang vec3df
-		 *
-		 * @author	Bryce Standley
-		 * @date	7/09/2021
-		 *
-		 * @param 	other	The other.
-		 *
-		 * @returns	The vector converted 3 to vector 3df.
-		 */
-
-		irrklang::vec3df ConvertVec3ToVec3df(const glm::vec3& other);
-
-		/**
-		 * @fn	static rp3d::Vector3 ToRp3dVec3(const glm::vec3& values)
-		 *
-		 * @brief	Converts the glm vec3 values to a rp3D vector 3 values
-		 *
-		 * @author	Bryce Standley
-		 * @date	7/09/2021
-		 *
-		 * @param 	values	The values.
-		 *
-		 * @returns	Values as a rp3d::Vector3.
-		 */
-
-		static rp3d::Vector3 ToRp3dVec3(const glm::vec3& values)
-		{
-			return rp3d::Vector3(values.x, values.y, values.z);
-		}
-
-		/**
-		* @fn	static glm::vec3 FromRp3dVec3(const rp3d::Vector3& values)
-		*
-		* @brief	Converts the reactphysics3d vector3 values to a glm vec3 values
-		*
-		* @author	Bryce Standley
-		* @date	7/09/2021
-		*
-		* @param 	values	The values.
-		*
-		* @returns	Values as a glm::vec3.
-		*/
-
-		static glm::vec3 FromRp3dVec3(const rp3d::Vector3& values)
-		{
-			return glm::vec3(values.x, values.y, values.z);
-		}
-		
-		/**
-		 * @fn	static rp3d::Quaternion ToRp3dQuat(const glm::quat& values)
-		 *
-		 * @brief	Converts the glm quaternion values to a rp3D quaternion
-		 *
-		 * @author	Bryce Standley
-		 * @date	7/09/2021
-		 *
-		 * @param 	values	The values.
-		 *
-		 * @returns	Values as a rp3d::Quaternion.
-		 */
-
-		static rp3d::Quaternion ToRp3dQuat(const glm::quat& values)
-		{
-			return rp3d::Quaternion(values.x, values.y, values.z, values.w);
-		}
-
-		/**
-		* @fn	static glm::quat FromRp3dQuat(const rp3d::Quaternion& values)
-		*
-		* @brief	Converts the Rp3d quaternion values to a glm quaternion
-		*
-		* @author	Bryce Standley
-		* @date	7/09/2021
-		*
-		* @param 	values	The values.
-		*
-		* @returns	Values as a glm::quat
-		*/
-
-		static glm::quat FromRp3dQuat(const rp3d::Quaternion& values)
-		{
-			return glm::quat(values.w, values.x, values.y, values.z);
-		}
-
-
-		/**
-		 * @fn	static rp3d::Transform ToRp3dTransform(const TransformComponent& transform)
-		 *
-		 * @brief	Converts a TranformComponent transform to a rp3d transform
-		 *
-		 * @author	Bryce Standley
-		 * @date	7/09/2021
-		 *
-		 * @param 	transform	The transform.
-		 *
-		 * @returns	Transform as a rp3d::Transform.
-		 */
-
-		static rp3d::Transform ToRp3dTransform(const TransformComponent& transform)
-		{
-			return rp3d::Transform(ToRp3dVec3(transform.Position), ToRp3dQuat(glm::quat(transform.Rotation)));
 		}
 
 		/**

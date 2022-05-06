@@ -75,16 +75,5 @@ namespace tnah
 
 			return true;
 		}
-
-		//rp3d::ToRp3dTransform() {}
-
-		irrklang::vec3df ConvertVec3ToVec3df(const glm::vec3& other)
-		{
-			irrklang::vec3df value;
-			value.X = other.x;
-			value.Y = other.y;
-			value.Z = other.z;
-			return value;
-		}
 	}
 }

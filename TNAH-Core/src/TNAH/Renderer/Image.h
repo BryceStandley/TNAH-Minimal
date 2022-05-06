@@ -89,18 +89,6 @@ namespace tnah {
 
         void Free(void* data) override;
 
-        /**
-         * @fn	ktxTexture* Image::GetKtxData() const override;
-         *
-         * @brief	Gets ktx data
-         *
-         * @author	Bryce Standley
-         * @date	12/09/2021
-         *
-         * @returns	Null if it fails, else the ktx data.
-         */
-
-        ktxTexture* GetKtxData() const override;
 
         /**
          * @fn	uchar8_t* Image::GetImageData() const override;

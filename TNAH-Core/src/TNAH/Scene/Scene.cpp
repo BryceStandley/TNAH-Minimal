@@ -5,14 +5,8 @@
 #include "TNAH/Core/Application.h"
 #include "TNAH/Core/Input.h"
 #include "TNAH/Renderer/Renderer.h"
-#include "TNAH/Audio/Audio.h"
-#include "TNAH/Physics/PhysicsEvents.h"
 #include <glm/gtx/string_cast.hpp>
 
-#include "Components/AI/Affordance.h"
-#include "Components/AI/AIComponent.h"
-#include "Components/AI/CharacterComponent.h"
-#include "Components/AI/PlayerInteractions.h"
 
 namespace tnah{
 
@@ -61,10 +55,6 @@ namespace tnah{
 		auto& light = l.AddComponent<LightComponent>();
 		light.Light = Light::CreateDirectional();
 		light.Light->m_IsSceneLight = true;
-
-		//Physics
-		listener = new Physics::PhysicsEvents();
-		Physics::PhysicsEngine::Initialise(listener);
 		
 		s_ActiveScene.Scene.Reset(this);
 	}
@@ -106,19 +96,12 @@ namespace tnah{
 	void Scene::OnUpdate(Timestep deltaTime)
 	{
 		
-#pragma region OnUpdates
-		
-		Physics::PhysicsEngine::OnUpdate(deltaTime);
-
-#pragma endregion OnUpdates
 		
 #pragma region PlayerControllerUpdate
 		//TODO: Actually test the player controller component
 		// Process any PlayerControllers before updating anything else in the scene
 		{
 			auto e = EditorComponent();
-
-			Audio::OnUpdate();
 			
 			auto view = m_Registry.view<PlayerControllerComponent, TransformComponent>();
 			for(auto obj : view)
@@ -171,18 +154,6 @@ namespace tnah{
 				transform.Forward = forward;
 				transform.Right = right;
 				transform.Up = up;
-			}
-		}
-
-		{
-			auto view = m_Registry.view<AStarObstacleComponent, TransformComponent>();
-			{
-				for(auto entity : view)
-				{
-					auto & star = view.get<AStarObstacleComponent>(entity);
-					auto& transform = view.get<TransformComponent>(entity);
-					AStar::AddUsedPosition(Int2(static_cast<int>(round(transform.Position.x)), static_cast<int>(round(transform.Position.z))), star.dynamic);
-				}
 			}
 		}
 		
@@ -336,12 +307,6 @@ namespace tnah{
 						auto& transform = view.get<TransformComponent>(entity);
 						glm::mat4 matrix = transform.GetTransform();
 						auto& go = FindGameObjectByID(entity);
-						if(go.HasComponent<RigidBodyComponent>())
-						{
-							auto & rb = go.GetComponent<RigidBodyComponent>();
-							if(rb.Body->GetType() == Physics::BodyType::Dynamic)
-								matrix = transform.GetQuatTransform();
-						}
 						
 						if(model.Model)
 						{
@@ -363,252 +328,6 @@ namespace tnah{
 				}
 #pragma endregion
 
-#pragma region ColliderRender
-
-				{
-					
-					//Collider rendering should only be used for debugging and in the editor to set sizes
-					if((m_IsEditorScene || Application::Get().GetDebugModeStatus()) && Physics::PhysicsEngine::IsColliderRenderingEnabled() && passes == 0)
-					{
-						auto pair = Physics::PhysicsEngine::GetColliderRenderObjects();
-						auto lineArr = pair.first.first;
-						auto lineBuf = pair.first.second;
-				
-						auto triArr = pair.second.first;
-						auto triBuf = pair.second.second;
-						Renderer::SubmitCollider(lineArr, lineBuf,triArr,triBuf);
-					}
-				}
-
-				{
-
-						auto view = m_Registry.view<AStarComponent, MeshComponent, TransformComponent>();
-						{
-							for(auto entity : view)
-							{
-								auto &astar = view.get<AStarComponent>(entity);
-								if(astar.reset)
-								{
-									AStar::Init(astar.StartingPos, astar.Size);
-									astar.reset = false;
-								}
-								
-								if(Application::Get().GetDebugModeStatus() || astar.DisplayMap)
-								{
-								auto& model = view.get<MeshComponent>(entity);
-								auto& transform = view.get<TransformComponent>(entity);
-							
-								auto map = AStar::GetUsedPoints();
-								//auto array = AStar::GetMapPoints();
-								auto pos = AStar::GetStartingPos();
-								auto end = AStar::GetEndPosition();
-								for(int x = pos.x; x < end.x; x++)
-								{
-									for(int y = pos.y; y < end.y; y++)
-									{
-										if(map[x][y])
-										{
-											auto tempTransform = transform;
-											tempTransform.Position.x = (float)x;
-											tempTransform.Position.z = (float)y;
-											tempTransform.Position.y = -4.0f;
-											tempTransform.Scale = {0.5f, 0.5f, 0.5f};
-											if(model.Model)
-											{
-												for (auto& mesh : model.Model->GetMeshes())
-												{
-													Renderer::SubmitMesh(mesh.GetMeshVertexArray(), mesh.GetMeshMaterial(), sceneLights, tempTransform.GetTransform());
-												}
-											}
-										}
-									}
-								}
-
-								/*for(int x = pos.x; x < end.x; x++)
-								{
-									for(int y = pos.y; y < end.y; y++)
-									{
-										auto tempTransform = transform;
-										tempTransform.Position.x = array[x][y].position.x;
-										tempTransform.Position.z = array[x][y].position.y;
-										tempTransform.Position.y = -4;
-										tempTransform.Scale = {0.1, 0.1, 0.1};
-										if(model.Model)
-										{
-											for (auto& mesh : model.Model->GetMeshes())
-											{
-												Renderer::SubmitMesh(mesh.GetMeshVertexArray(), mesh.GetMeshMaterial(), sceneLights, tempTransform.GetTransform());
-											}
-										}
-									}
-								}*/
-							}
-						}	
-					}
-				}
-#pragma endregion
-
-#pragma region AudioListeners
-
-				//Handles audio listeners
-				{
-					auto view = m_Registry.view<TransformComponent, AudioListenerComponent>();
-					for(auto entity : view)
-					{
-						auto& listen = view.get<AudioListenerComponent>(entity);
-						auto& transform = view.get<TransformComponent>(entity);
-
-						if(listen.m_ActiveListing)
-							Audio::SetListener(transform);
-						
-						// auto hear = m_Registry.view<AudioSource>();
-						// for(auto sound : hear)
-						// {
-						//		if(sound.m_3D)
-						// 		//Call a OnAudioListen type function where we can check distance
-						// }
-					}
-				}
-
-#pragma endregion
-				
-#pragma region AudioSource
-				
-				//Handle audio
-				{
-					auto view = m_Registry.view<TransformComponent, AudioSourceComponent>();
-					for(auto entity : view)
-					{
-						auto& sound = view.get<AudioSourceComponent>(entity);
-						auto& transform = view.get<TransformComponent>(entity);
-
-						if(sound.m_Loaded)
-						{
-							Audio::UpdateSound(sound, transform);
-						}
-						else if(sound.GetStartLoad())
-						{
-							sound.m_Loaded = Audio::AddAudioSource(sound);
-						}
-					}
-				}
-
-
-				{
-					auto objects = m_Registry.view<Affordance, TransformComponent>();
-					auto view = m_Registry.view<AIComponent, CharacterComponent, TransformComponent, RigidBodyComponent>();
-					auto player = m_Registry.view<PlayerInteractions, TransformComponent>();
-					auto view2 = m_Registry.view<AStarComponent, MeshComponent, TransformComponent>();
-					bool playerClose = false;
-					mPlayerInteractions = false;
-					mTargetString = "";
-				
-					for(auto entity : view)
-					{
-						auto &t = view.get<TransformComponent>(entity);
-						auto &ai = view.get<AIComponent>(entity);
-						auto &c = view.get<CharacterComponent>(entity);
-						auto &rb = view.get<RigidBodyComponent>(entity);
-						int i = 0;
-						for(auto obj : objects)
-						{
-							auto & objTrasnform = objects.get<TransformComponent>(obj);
-							auto & affordance = objects.get<Affordance>(obj);
-
-							if(glm::distance(objTrasnform.Position, t.Position) < c.aiCharacter->GetDistance())
-							{
-									float affordanceValue = affordance.GetActionValue(c.aiCharacter->GetDesiredAction());
-									auto event = c.aiCharacter->CheckAction(affordanceValue, glm::distance(objTrasnform.Position, t.Position), affordance.GetTag());
-								
-									if(event.second)
-									{
-										Int2 new_pos = AStar::GenerateRandomPosition(Int2((int)objTrasnform.Position.x, (int)objTrasnform.Position.z)).position;
-										switch (c.aiCharacter->GetDesiredAction())
-										{
-										case Actions::drink:
-										case Actions::pickup:
-											objTrasnform.Position.x = (float)new_pos.x;
-											objTrasnform.Position.z = (float)new_pos.y;
-											break;
-										default:
-											break;
-										}
-									}
-							}
-						}
-						
-						if(!playerClose)
-						{
-							for(auto p : player)
-							{
-								auto & playerTransform = player.get<TransformComponent>(p);
-								auto & interactions = player.get<PlayerInteractions>(p);
-
-								if(glm::distance(playerTransform.Position, t.Position) < interactions.distance)
-								{
-									mPlayerInteractions = true;
-									if(Input::IsKeyPressed(Key::U))
-									{
-										c.aiCharacter->ApplyPlayerAction(PlayerActions::pumpUp);
-									}
-									else if(Input::IsKeyPressed(Key::I))
-									{
-										c.aiCharacter->ApplyPlayerAction(PlayerActions::calm);
-									}
-									else if(Input::IsKeyPressed(Key::P))
-									{
-										c.aiCharacter->ApplyPlayerAction(PlayerActions::compliment);
-									}
-									else if(Input::IsKeyPressed(Key::O))
-									{
-										c.aiCharacter->ApplyPlayerAction(PlayerActions::insult);
-									}
-									mTargetString = c.aiCharacter->CharacterString();
-									playerClose = true;
-								}
-							}	
-						}
-
-						ai.SetTargetPosition(c.aiCharacter->OnUpdate(deltaTime, t));
-						ai.SetWander(c.aiCharacter->GetWander());
-						ai.SetMovementSpeed(c.aiCharacter->GetSpeed());
-						ai.OnUpdate(deltaTime, t);
-						if(Application::Get().GetDebugModeStatus())
-						{
-							for(auto entity : view2)
-							{
-								auto& model = view2.get<MeshComponent>(entity);
-								auto& transform = view2.get<TransformComponent>(entity);
-							
-								auto queue = ai.GetPositions();
-								for(auto& nodes : queue)
-								{
-									auto tempTransform = transform;
-									tempTransform.Position.x = (float)nodes.position.x;
-									tempTransform.Position.z = (float)nodes.position.y;
-									tempTransform.Position.y = -4.0f;
-									tempTransform.Scale = {0.25f, 0.25f, 0.25f};
-									tempTransform.Rotation = {0.0f, 0.0f, 0.0f};
-									if(model.Model)
-									{
-										for (auto& mesh : model.Model->GetMeshes())
-										{
-											Renderer::SubmitMesh(mesh.GetMeshVertexArray(), mesh.GetMeshMaterial(), sceneLights, tempTransform.GetTransform());
-										}
-									}
-								}	
-						}
-							
-					}
-						rb.Body->OnUpdate(t);
-				}
-					}
-
-				Physics::PhysicsEngine::OnFixedUpdate(deltaTime, PhysicsTimestep(), m_Registry);
-				AStar::Update();
-				
-#pragma endregion 
-
 				Renderer::EndScene();
 			}
 #pragma endregion
@@ -623,17 +342,6 @@ namespace tnah{
 		
 	}
 #pragma endregion SceneUpdate
-
-#pragma  region ScenePhyscisUpdate
-	
-	void Scene::OnFixedUpdate(Timestep deltaTime, PhysicsTimestep physicsDeltaTime)
-	{
-#pragma region PhysicsStep
-			
-#pragma endregion 
-	}
-	
-#pragma endregion ScenePhyscisUpdate
 
 #pragma region SceneHelpers
 	glm::mat4 Scene::GetTransformRelativeToParent(GameObject gameObject)
@@ -699,10 +407,6 @@ namespace tnah{
 	{
 		m_EditorGameFramebuffer->~Framebuffer();
 		m_EditorSceneFramebuffer->~Framebuffer();
-		Audio::Clear();
-		//m_EditorCamera->~GameObject();
-		//m_ActiveCamera ->~GameObject();
-		//m_SceneLight->~GameObject();
 		
 	}
 

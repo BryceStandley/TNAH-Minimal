@@ -2,7 +2,6 @@
 #include "TNAH/Core/Core.h"
 #include "TNAH/Events/Event.h"
 #include "TNAH/Core/Timestep.h"
-#include "TNAH/Physics/PhysicsTimestep.h"
 
 namespace tnah {
 
@@ -15,7 +14,7 @@ namespace tnah {
 	 * @date	10/09/2021
 	 */
 
-	class Layer
+	class TNAH_API Layer
 	{
 	public:
 
@@ -78,18 +77,6 @@ namespace tnah {
 
 		virtual void OnUpdate(Timestep ts) {}
 
-		/**
-		 * @fn	virtual void Layer::OnFixedUpdate(PhysicsTimestep ps)
-		 *
-		 * @brief	Executes on fixed update (for physics purposes)
-		 *
-		 * @author	Dylan Blereau
-		 * @date	10/09/2021
-		 *
-		 * @param 	ps	The physicsTimestep.
-		 */
-
-		virtual void OnFixedUpdate(Timestep ts, PhysicsTimestep ps) {}
 
 		/**
 		 * @fn	virtual void Layer::OnImGuiRender()

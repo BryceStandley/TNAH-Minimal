@@ -1,9 +1,5 @@
 ﻿#pragma once
 #include "Scene.h"
-#include "Components/AI/Affordance.h"
-#include "Components/AI/AIComponent.h"
-#include "Components/AI/CharacterComponent.h"
-#include "TNAH/Physics/Collider.h"
 
 namespace tnah
 {
@@ -197,106 +193,6 @@ namespace tnah
          * 
          */
         static std::string GenerateLight(const LightComponent& light, const uint32_t& totalTabs = 0);
-
-        /**
-         * 
-         * \fn std::string GenerateAudioListener
-         * 
-         * \brief Generates audio listener settings to serialize
-         * 
-         * \author Bryce Standley
-         * \date 13/9/2021
-         * 
-         * \param sound
-         * \param totalTabs
-         * 
-         * \return 
-         * 
-         */
-        static std::string GenerateAudioListener(const AudioListenerComponent& sound, const uint32_t& totalTabs = 0);
-
-        /**
-         * 
-         * \fn std::string GenerateAudioSource
-         * 
-         * \brief Generates audio source settings to serialize
-         * 
-         * \author Bryce Standley
-         * \date 13/9/2021
-         * 
-         * \param sound
-         * \param totalTabs
-         * 
-         * \return 
-         * 
-         */
-        static std::string GenerateAudioSource(const AudioSourceComponent& sound, const uint32_t& totalTabs = 0);
-
-        /**
-         * 
-         * \fn std::string GenerateRigidBody
-         * 
-         * \brief Generates rigidbody settings to serialize
-         * 
-         * \author Bryce Standley
-         * \date 13/9/2021
-         * 
-         * \param rb
-         * \param totalTabs
-         * 
-         * \return 
-         * 
-         */
-        static std::string GenerateRigidBody(const RigidBodyComponent& rb, const uint32_t& totalTabs = 0);
-
-        /**
-        * 
-        * \fn std::string GenerateCollider(const Ref<Physics::Collider>& col, const uint32_t& totalTabs = 0);
-        * 
-        * \brief Generates collider settings to serialize
-        * 
-        * \author Bryce Standley
-        * \date 13/9/2021
-        * 
-        * \param col
-        * \param totalTabs
-        * 
-        * \return string
-        * 
-        */
-        static std::string GenerateCollider(const Ref<Physics::Collider>& col, const uint32_t& totalTabs = 0);
-
-        /**
-         * @brief Generates a AI conponent to serialize
-         * @author Christopher Logan
-         * @date 06-11-2021
-         * @return std::string 
-         */
-        static std::string GenerateAi(const AIComponent& ai, const CharacterComponent &c,const uint32_t& totalTabs = 0);
-
-        /**
-         * @brief Generates a Astar component to serialize
-         * @author Christopher Logan
-         * @date 06-11-2021
-         * @return std::string 
-         */
-        static std::string GenerateAStar(const AStarComponent& astar, const uint32_t& totalTabs = 0);
-
-        /**
-         * @brief Generates a Astar obstacle component to serialize
-         * @author Christopher Logan
-         * @date 06-11-2021
-         * @return std::string 
-         */
-        static std::string GenerateAStarObstacle(const AStarObstacleComponent& astar, const uint32_t& totalTabs = 0);
-
-        /**
-         * @brief Generates a Affordance component to serialize
-         * @author Christopher Logan
-         * @date 06-11-2021
-         * @return std::string 
-         */
-        static std::string GenerateAffordance(Affordance& astar, const uint32_t& totalTabs = 0);
 
         //Tag creators
         /**
@@ -771,42 +667,6 @@ namespace tnah
          * 
          */
         static MeshComponent GetMeshFromFile(const std::string& fileContents, std::pair<size_t, size_t> componentTagPositions);
-
-        /**
-         * 
-         * \fn void GetRigidBodyFromFile(const std::string& fileContents, std::pair<size_t, size_t> componentTagPositions, GameObject& gameObject);
-         * 
-         * \brief Finds the all data for the scene within '<rigidbody> </rigidbody>' tags
-         * 
-         * \author Bryce Standley
-         * \date 13/9/2021
-         * 
-         * \param fileContents
-         * \param componentTagPositions
-         * \param gameObject
-         * 
-         * \return 
-         * 
-         */
-        static void GetRigidBodyFromFile(const std::string& fileContents, std::pair<size_t, size_t> componentTagPositions, GameObject& gameObject);
-
-        /**
-         * 
-         * \fn bool GetColliderFromFile(const std::string& fileContents, std::pair<size_t, size_t> componentTagPositions, RigidBodyComponent& rb);
-         * 
-         * \brief Finds the all data for the scene within '<boxCollider> </boxCollider>' tags
-         * 
-         * \author Bryce Standley
-         * \date 13/9/2021
-         * 
-         * \param fileContents
-         * \param componentTagPositions
-         * \param rb
-         * 
-         * \return 
-         * 
-         */
-        static bool GetColliderFromFile(const std::string& fileContents, std::pair<size_t, size_t> componentTagPositions, RigidBodyComponent& rb);
         
         /**
          * 
@@ -859,38 +719,6 @@ namespace tnah
          */
         static LightComponent GetLightFromFile(const std::string& fileContents, std::pair<size_t, size_t> componentTagPositions);
      
-        /**
-         * @brief Get the Ai From File
-         * @author Christopher Logan
-         * @date 06-11-2021
-         * @return CharacterNames 
-         */
-        static CharacterNames GetAiFromFile(const std::string& fileContents, std::pair<size_t, size_t> componentTagPositions);
-
-        /**
-         * @brief Get the Astar From File
-         * @author Christopher Logan
-         * @date 06-11-2021
-         * @return AStarComponent 
-         */
-        static AStarComponent GetAstarFromFile(const std::string& fileContents, std::pair<size_t, size_t> componentTagPositions);
-
-        /**
-         * @brief Get the Astar Obstacle From File
-         * @author Christopher Logan
-         * @date 06-11-2021
-         * @return true 
-         * @return false 
-         */
-        static bool GetAstarObstacleFromFile(const std::string& fileContents, std::pair<size_t, size_t> componentTagPositions);
-
-        /**
-         * @brief Get the Affordances From File
-         * @author Christopher Logan
-         * @date 06-11-2021
-         * @return Affordance 
-         */
-        static Affordance GetAffordancesFromFile(const std::string& fileContents, std::pair<size_t, size_t> componentTagPositions);
      
         /**
          * 

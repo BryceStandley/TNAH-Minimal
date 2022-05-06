@@ -170,18 +170,6 @@ namespace tnah {
 
 		void Bind() const override;
 
-		/**
-		 * @fn	ktxTexture* OpenGLTexture2D::GetKtxData() const override
-		 *
-		 * @brief	Gets ktx data
-		 *
-		 * @author	Dylan Blereau
-		 * @date	7/09/2021
-		 *
-		 * @returns	Null if it fails, else the ktx data.
-		 */
-
-		ktxTexture* GetKtxData() const override { return nullptr; }
 
 		/**
 		 * @fn	unsigned char* OpenGLTexture2D::GetImageData() const override
@@ -349,19 +337,6 @@ namespace tnah {
 		 */
 
 		void Bind() const override;
-
-		/**
-		 * @fn	ktxTexture* OpenGLTexture3D::GetKtxData() const override
-		 *
-		 * @brief	Gets ktx data
-		 *
-		 * @author	Dylan Blereau
-		 * @date	7/09/2021
-		 *
-		 * @returns	nullptr.
-		 */
-
-		ktxTexture* GetKtxData() const override { return nullptr; }
 
 		/**
 		 * @fn	unsigned char* OpenGLTexture3D::GetImageData() const override

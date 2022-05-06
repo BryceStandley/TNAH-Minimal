@@ -12,7 +12,7 @@ namespace tnah {
 		}
 		else
 		{
-			TNAH_INFO("GameObject {0} Doesnt have a tag component!", GetID());
+			TNAH_INFO("GameObject {0} Doesnt have a tag component!");
 		}
 	}
 
@@ -23,7 +23,7 @@ namespace tnah {
 			auto& tag = GetComponent<TagComponent>();
 			return tag.Tag;
 		}
-		TNAH_INFO("GameObject {0} Doesnt have a tag component!", GetID());
+		TNAH_INFO("GameObject {0} Doesnt have a tag component!");
 		return "";
 	}
 }

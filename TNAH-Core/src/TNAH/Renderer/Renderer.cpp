@@ -266,39 +266,6 @@ namespace tnah {
 		IncrementDrawCallsPerFrame();
 	}
 #pragma endregion
-
-#pragma region PhysicsColliderRendering
-	
-	void Renderer::SubmitCollider(Ref<VertexArray> lineVertexArray, Ref<VertexBuffer> lineVertexBuffer,
-		Ref<VertexArray> triangleVertexArray, Ref<VertexBuffer> triangleVertexBuffer)
-	{
-		RenderCommand::SetWireframe(true);
-		auto shader = Physics::PhysicsEngine::GetColliderShader();
-		shader->Bind();
-		shader->SetMat4("u_ViewProjectionMatrix", s_SceneData->ViewProjection);
-		shader->SetMat4("u_Transform",  Physics::PhysicsEngine::GetColliderRendererTransform().GetTransform());
-		shader->SetInt("u_isGlobalVertexColorEnabled", 0); // use global color
-		shader->SetVec4("u_GlobalVertexColor", glm::vec4(1.0f)); // Disable global color
-		
-		
-		const auto renderer = Physics::PhysicsEngine::GetColliderRenderer();
-		
-		if(renderer->getNbLines() > 0)
-		{
-			lineVertexArray->UpdateVertexBuffer();
-			RenderCommand::DrawArray(lineVertexArray, DrawMode::Lines);
-		}
-		
-		if(renderer->getNbTriangles() > 0)
-		{
-			triangleVertexArray->UpdateVertexBuffer();
-			RenderCommand::DrawArray(triangleVertexArray, DrawMode::Triangles);
-		}
-
-		shader->Unbind();
-		RenderCommand::SetWireframe(false);
-	}
-#pragma endregion
 	
 #pragma endregion
 	

@@ -4,10 +4,10 @@
 #pragma warning(push, 0)
 #include <memory>
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
-//#define SPDLOG_FUNCTION
+//#define SPDLOG_LEVEL_TRACE
 #include <spdlog/spdlog.h>
-#include <spdlog/sinks/stdout_color_sinks.h>
-#include "spdlog/fmt/ostr.h"
+#include <spdlog/sinks/stdout_sinks.h>
+#include <spdlog/fmt/ostr.h>
 #pragma warning(pop)
 
 namespace tnah
@@ -94,15 +94,15 @@ namespace tnah
 }
 
 // Core log macros
-#define TNAH_CORE_TRACE(...)    SPDLOG_LOGGER_TRACE(::tnah::Log::GetCoreLogger(), __VA_ARGS__) // White
-#define TNAH_CORE_INFO(...)     SPDLOG_LOGGER_INFO(::tnah::Log::GetCoreLogger(), __VA_ARGS__)// Green
-#define TNAH_CORE_WARN(...)     SPDLOG_LOGGER_WARN(::tnah::Log::GetCoreLogger(), __VA_ARGS__) // Yellow
-#define TNAH_CORE_ERROR(...)    SPDLOG_LOGGER_ERROR(::tnah::Log::GetCoreLogger(), __VA_ARGS__) // Red
-#define TNAH_CORE_FATAL(...)    SPDLOG_LOGGER_CRITICAL(::tnah::Log::GetCoreLogger(), __VA_ARGS__) // White with red highlight
+#define TNAH_CORE_TRACE(...)    ::tnah::Log::GetCoreLogger()->trace(__VA_ARGS__) // White
+#define TNAH_CORE_INFO(...)     ::tnah::Log::GetCoreLogger()->info(__VA_ARGS__)// Green
+#define TNAH_CORE_WARN(...)     ::tnah::Log::GetCoreLogger()->warn(__VA_ARGS__) // Yellow
+#define TNAH_CORE_ERROR(...)    ::tnah::Log::GetCoreLogger()->error(__VA_ARGS__) // Red
+#define TNAH_CORE_FATAL(...)    ::tnah::Log::GetCoreLogger()->fatal(__VA_ARGS__) // White with red highlight
 
 // Client log macros
-#define TNAH_TRACE(...)	      SPDLOG_LOGGER_TRACE(::tnah::Log::GetClientLogger(), __VA_ARGS__)
-#define TNAH_INFO(...)	      SPDLOG_LOGGER_INFO(::tnah::Log::GetClientLogger(), __VA_ARGS__)
-#define TNAH_WARN(...)	      SPDLOG_LOGGER_WARN(::tnah::Log::GetClientLogger(), __VA_ARGS__)
-#define TNAH_ERROR(...)	      SPDLOG_LOGGER_ERROR(::tnah::Log::GetClientLogger(), __VA_ARGS__)
-#define TNAH_FATAL(...)	      SPDLOG_LOGGER_CRITICAL(::tnah::Log::GetClientLogger(), __VA_ARGS__)
+#define TNAH_TRACE(...)	      ::tnah::Log::GetClientLogger()->trace(__VA_ARGS__)
+#define TNAH_INFO(...)	      ::tnah::Log::GetClientLogger()->info(__VA_ARGS__)
+#define TNAH_WARN(...)	      ::tnah::Log::GetClientLogger()->warn(__VA_ARGS__)
+#define TNAH_ERROR(...)	      ::tnah::Log::GetClientLogger()->error(__VA_ARGS__)
+#define TNAH_FATAL(...)	      ::tnah::Log::GetClientLogger()->fatal(__VA_ARGS__)

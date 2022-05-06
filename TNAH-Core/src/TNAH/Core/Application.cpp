@@ -4,7 +4,6 @@
 #define GLFW_EXPOSE_NATIVE_WIN32
 #include "GLFW/glfw3.h"
 #include "GLFW/glfw3native.h"
-#include "TNAH/Audio/Audio.h"
 
 namespace tnah
 {
@@ -21,7 +20,6 @@ namespace tnah
  
 
 		Renderer::Init();
-		Audio::Init();
 
 		if (m_ImGuiLayer == nullptr)
 		{
@@ -56,7 +54,6 @@ namespace tnah
 
 	void Application::Run()
 	{
-		PhysicsTimestep physicsTimestep((60.0f * 4));
 
 		while (m_Running)
 		{
@@ -64,7 +61,6 @@ namespace tnah
 			Timestep timestep = time - m_DeltaTime;
 			m_DeltaTime = time;
 
-			physicsTimestep.AddFrameTime(timestep);
 			
 			CheckDebugModeStatus();
 
@@ -72,12 +68,6 @@ namespace tnah
 			{
 				for (Layer* layer : m_LayerStack)
 				{
-					while (physicsTimestep.FixedUpdateCheck())
-					{
-						layer->OnFixedUpdate(timestep, physicsTimestep);
-						physicsTimestep.Update();
-					}
-
 					layer->OnUpdate(timestep);
 				}
 			}
@@ -293,7 +283,6 @@ namespace tnah
 	}
 	void Application::Close()
 	{
-		Audio::Shutdown();
 		m_Running = false;
 	}
 }
