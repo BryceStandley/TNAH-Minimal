@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TNAH-Core", "TNAH-Core\TNAH-Core.vcxproj", "{56B6067B-C036-4EDC-B28C-F3CA2ED6DD5D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56B6067B-C036-4EDC-B28C-F3CA2ED6DD5D}.Release|Any CPU.ActiveCfg = Release|Win32
+		{56B6067B-C036-4EDC-B28C-F3CA2ED6DD5D}.Release|Any CPU.Build.0 = Release|Win32
+		{56B6067B-C036-4EDC-B28C-F3CA2ED6DD5D}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{56B6067B-C036-4EDC-B28C-F3CA2ED6DD5D}.Debug|Any CPU.Build.0 = Debug|x64
+	EndGlobalSection
+EndGlobal

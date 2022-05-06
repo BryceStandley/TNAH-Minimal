@@ -1,0 +1,24 @@
+[submodule "vendor/glm"]
+	path = vendor/glm
+	url = https://github.com/g-truc/glm.git
+[submodule "vendor/glfw"]
+	path = vendor/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "vendor/assimp"]
+	path = vendor/assimp
+	url = https://github.com/assimp/assimp.git
+[submodule "vendor/entt"]
+	path = vendor/entt
+	url = https://github.com/skypjack/entt.git
+[submodule "vendor/imgui-base/imgui"]
+	path = vendor/imgui-base/imgui
+	url = https://github.com/ocornut/imgui.git
+[submodule "vendor/ImGuizmo-base/ImGuizmo"]
+	path = vendor/ImGuizmo-base/ImGuizmo
+	url = https://github.com/CedricGuillemet/ImGuizmo.git
+[submodule "vendor/ktx"]
+	path = vendor/ktx
+	url = https://github.com/KhronosGroup/KTX-Software.git
+[submodule "vendor/spdlog"]
+	path = vendor/spdlog
+	url = https://github.com/gabime/spdlog.git

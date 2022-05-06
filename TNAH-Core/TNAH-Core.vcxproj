@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{56B6067B-C036-4EDC-B28C-F3CA2ED6DD5D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>TNAH_Core</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)\bin\$(Platform)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\bin\int\$(Platform)-$(Configuration)\</IntDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>TNAH_BUILD_DLL;TNAH_PLATFORM_WINDOWS;_DEBUG;CPPDYNAMICLIBRARYTEMPLATE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>$(ProjectDir)src\tnahpch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)\vendor\;$(ProjectDir)src\;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)\vendor\;</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>TNAH_BUILD_DLL;TNAH_PLATFORM_WINDOWS;NDEBUG;CPPDYNAMICLIBRARYTEMPLATE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLGraphicsContext.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="src\Platform\Windows\WinInput.cpp" />
+    <ClCompile Include="src\Platform\Windows\WinWindow.cpp" />
+    <ClCompile Include="src\tnahpch.cpp" />
+    <ClCompile Include="src\TNAH\Core\Application.cpp" />
+    <ClCompile Include="src\TNAH\Core\FileManager.cpp" />
+    <ClCompile Include="src\TNAH\Core\Log.cpp" />
+    <ClCompile Include="src\TNAH\Core\Math.cpp" />
+    <ClCompile Include="src\TNAH\Core\Ref.cpp" />
+    <ClCompile Include="src\TNAH\Core\UUID.cpp" />
+    <ClCompile Include="src\TNAH\Core\Window.cpp" />
+    <ClCompile Include="src\TNAH\Editor\EditorUI.cpp" />
+    <ClCompile Include="src\TNAH\Layers\ImGuiBuilder.cpp" />
+    <ClCompile Include="src\TNAH\Layers\ImGuiFileBrowser.cpp" />
+    <ClCompile Include="src\TNAH\Layers\ImGuiLayer.cpp" />
+    <ClCompile Include="src\TNAH\Layers\ImGuizmo.cpp" />
+    <ClCompile Include="src\TNAH\Layers\Layer.cpp" />
+    <ClCompile Include="src\TNAH\Layers\LayerStack.cpp" />
+    <ClCompile Include="src\TNAH\Layers\UI.cpp" />
+    <ClCompile Include="src\TNAH\Layers\Widgets.cpp" />
+    <ClCompile Include="src\TNAH\Renderer\Camera.cpp" />
+    <ClCompile Include="src\TNAH\Renderer\Image.cpp" />
+    <ClCompile Include="src\TNAH\Renderer\Light.cpp" />
+    <ClCompile Include="src\TNAH\Renderer\Material.cpp" />
+    <ClCompile Include="src\TNAH\Renderer\Mesh.cpp" />
+    <ClCompile Include="src\TNAH\Renderer\RenderCommand.cpp" />
+    <ClCompile Include="src\TNAH\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\TNAH\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="src\TNAH\Renderer\RenderingBuffers.cpp" />
+    <ClCompile Include="src\TNAH\Renderer\Shader.cpp" />
+    <ClCompile Include="src\TNAH\Renderer\Texture.cpp" />
+    <ClCompile Include="src\TNAH\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\TNAH\Scene\Components\AI\Actions.cpp" />
+    <ClCompile Include="src\TNAH\Scene\Components\AI\Affordance.cpp" />
+    <ClCompile Include="src\TNAH\Scene\Components\AI\AIComponent.cpp" />
+    <ClCompile Include="src\TNAH\Scene\Components\AI\AStar.cpp" />
+    <ClCompile Include="src\TNAH\Scene\Components\AI\Character.cpp" />
+    <ClCompile Include="src\TNAH\Scene\Components\AI\Emotion.cpp" />
+    <ClCompile Include="src\TNAH\Scene\Components\AI\EmotionComponent.cpp" />
+    <ClCompile Include="src\TNAH\Scene\Components\AI\PlayerInteractions.cpp" />
+    <ClCompile Include="src\TNAH\Scene\Components\AI\StateMachine.cpp" />
+    <ClCompile Include="src\TNAH\Scene\Components\AnimatorComponent.cpp" />
+    <ClCompile Include="src\TNAH\Scene\Components\PhysicsComponents.cpp" />
+    <ClCompile Include="src\TNAH\Scene\Components\SkyboxComponent.cpp" />
+    <ClCompile Include="src\TNAH\Scene\Components\TerrainComponent.cpp" />
+    <ClCompile Include="src\TNAH\Scene\GameObject.cpp" />
+    <ClCompile Include="src\TNAH\Scene\Light\DirectionalLight.cpp" />
+    <ClCompile Include="src\TNAH\Scene\Light\PointLight.cpp" />
+    <ClCompile Include="src\TNAH\Scene\Light\SpotLight.cpp" />
+    <ClCompile Include="src\TNAH\Scene\Scene.cpp" />
+    <ClCompile Include="src\TNAH\Scene\SceneCamera.cpp" />
+    <ClCompile Include="src\TNAH\Scene\Serializer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLGraphicsContext.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
+    <ClInclude Include="src\Platform\Windows\WinInput.h" />
+    <ClInclude Include="src\Platform\Windows\WinWindow.h" />
+    <ClInclude Include="src\TNAH-App.h" />
+    <ClInclude Include="src\TNAH.h" />
+    <ClInclude Include="src\tnahpch.h" />
+    <ClInclude Include="src\TNAH\Core\AABB.h" />
+    <ClInclude Include="src\TNAH\Core\Application.h" />
+    <ClInclude Include="src\TNAH\Core\Buffer.h" />
+    <ClInclude Include="src\TNAH\Core\Core.h" />
+    <ClInclude Include="src\TNAH\Core\EntryPoint.h" />
+    <ClInclude Include="src\TNAH\Core\FileManager.h" />
+    <ClInclude Include="src\TNAH\Core\FileStructures.h" />
+    <ClInclude Include="src\TNAH\Core\Input.h" />
+    <ClInclude Include="src\TNAH\Core\KeyCodes.h" />
+    <ClInclude Include="src\TNAH\Core\Log.h" />
+    <ClInclude Include="src\TNAH\Core\Math.h" />
+    <ClInclude Include="src\TNAH\Core\MouseCodes.h" />
+    <ClInclude Include="src\TNAH\Core\Ref.h" />
+    <ClInclude Include="src\TNAH\Core\Singleton.h" />
+    <ClInclude Include="src\TNAH\Core\Timer.h" />
+    <ClInclude Include="src\TNAH\Core\Timestep.h" />
+    <ClInclude Include="src\TNAH\Core\Utility.h" />
+    <ClInclude Include="src\TNAH\Core\UUID.h" />
+    <ClInclude Include="src\TNAH\Core\Window.h" />
+    <ClInclude Include="src\TNAH\Debug\Debug.h" />
+    <ClInclude Include="src\TNAH\Editor\EditorUI.h" />
+    <ClInclude Include="src\TNAH\Events\ApplicationEvent.h" />
+    <ClInclude Include="src\TNAH\Events\DebugEvent.h" />
+    <ClInclude Include="src\TNAH\Events\Event.h" />
+    <ClInclude Include="src\TNAH\Events\KeyEvent.h" />
+    <ClInclude Include="src\TNAH\Events\MouseEvent.h" />
+    <ClInclude Include="src\TNAH\Layers\dirent.h" />
+    <ClInclude Include="src\TNAH\Layers\ImGuiFileBrowser.h" />
+    <ClInclude Include="src\TNAH\Layers\ImGuiLayer.h" />
+    <ClInclude Include="src\TNAH\Layers\ImGuizmo.h" />
+    <ClInclude Include="src\TNAH\Layers\Layer.h" />
+    <ClInclude Include="src\TNAH\Layers\LayerStack.h" />
+    <ClInclude Include="src\TNAH\Layers\UI.h" />
+    <ClInclude Include="src\TNAH\Layers\Widgets.h" />
+    <ClInclude Include="src\TNAH\Renderer\Animation.h" />
+    <ClInclude Include="src\TNAH\Renderer\AssimpGLMHelpers.h" />
+    <ClInclude Include="src\TNAH\Renderer\Bone.h" />
+    <ClInclude Include="src\TNAH\Renderer\BoneInfo.h" />
+    <ClInclude Include="src\TNAH\Renderer\Camera.h" />
+    <ClInclude Include="src\TNAH\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\TNAH\Renderer\Image.h" />
+    <ClInclude Include="src\TNAH\Renderer\Light.h" />
+    <ClInclude Include="src\TNAH\Renderer\Material.h" />
+    <ClInclude Include="src\TNAH\Renderer\Mesh.h" />
+    <ClInclude Include="src\TNAH\Renderer\RenderCommand.h" />
+    <ClInclude Include="src\TNAH\Renderer\Renderer.h" />
+    <ClInclude Include="src\TNAH\Renderer\RendererAPI.h" />
+    <ClInclude Include="src\TNAH\Renderer\RenderingBuffers.h" />
+    <ClInclude Include="src\TNAH\Renderer\Shader.h" />
+    <ClInclude Include="src\TNAH\Renderer\stb_image.h" />
+    <ClInclude Include="src\TNAH\Renderer\Texture.h" />
+    <ClInclude Include="src\TNAH\Renderer\VertexArray.h" />
+    <ClInclude Include="src\TNAH\Scene\Components\AI\Actions.h" />
+    <ClInclude Include="src\TNAH\Scene\Components\AI\Affordance.h" />
+    <ClInclude Include="src\TNAH\Scene\Components\AI\AIComponent.h" />
+    <ClInclude Include="src\TNAH\Scene\Components\AI\AStar.h" />
+    <ClInclude Include="src\TNAH\Scene\Components\AI\Character.h" />
+    <ClInclude Include="src\TNAH\Scene\Components\AI\CharacterComponent.h" />
+    <ClInclude Include="src\TNAH\Scene\Components\AI\Emotion.h" />
+    <ClInclude Include="src\TNAH\Scene\Components\AI\EmotionComponent.h" />
+    <ClInclude Include="src\TNAH\Scene\Components\AI\PlayerInteractions.h" />
+    <ClInclude Include="src\TNAH\Scene\Components\AI\StateMachine.h" />
+    <ClInclude Include="src\TNAH\Scene\Components\AnimatorComponent.h" />
+    <ClInclude Include="src\TNAH\Scene\Components\AudioComponents.h" />
+    <ClInclude Include="src\TNAH\Scene\Components\ComponentIdentification.h" />
+    <ClInclude Include="src\TNAH\Scene\Components\Components.h" />
+    <ClInclude Include="src\TNAH\Scene\Components\LightComponents.h" />
+    <ClInclude Include="src\TNAH\Scene\Components\PhysicsComponents.h" />
+    <ClInclude Include="src\TNAH\Scene\Components\SkyboxComponent.h" />
+    <ClInclude Include="src\TNAH\Scene\Components\TerrainComponent.h" />
+    <ClInclude Include="src\TNAH\Scene\GameObject.h" />
+    <ClInclude Include="src\TNAH\Scene\Light\DirectionalLight.h" />
+    <ClInclude Include="src\TNAH\Scene\Light\PointLight.h" />
+    <ClInclude Include="src\TNAH\Scene\Light\SpotLight.h" />
+    <ClInclude Include="src\TNAH\Scene\Scene.h" />
+    <ClInclude Include="src\TNAH\Scene\SceneCamera.h" />
+    <ClInclude Include="src\TNAH\Scene\Serializer.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
