@@ -22,13 +22,13 @@
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -100,7 +100,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLGraphicsContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
@@ -230,6 +229,78 @@
     <ProjectReference Include="..\Dependencies\Assimp\Assimp.vcxproj">
       <Project>{bbb460cf-6ea9-4b33-a76d-b9a0232262d7}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\Dependencies\GLAD\GLAD.vcxproj">
+      <Project>{a489d6b0-3833-4d48-ace0-d441975a38a8}</Project>
+      <Name>GLAD</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\GLFW\GLFW.vcxproj">
+      <Project>{a0e95fc1-e271-433c-88e8-84affa5f184b}</Project>
+      <Name>GLFW</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\imgui\imgui.vcxproj">
+      <Project>{755a16c6-2efe-4dbb-8a53-47fce2df1498}</Project>
+      <Name>imgui</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\fonts\opensans\LICENSE.txt" />
+    <Content Include="Resources\fonts\opensans\OpenSans-Bold.ttf" />
+    <Content Include="Resources\fonts\opensans\OpenSans-BoldItalic.ttf" />
+    <Content Include="Resources\fonts\opensans\OpenSans-ExtraBold.ttf" />
+    <Content Include="Resources\fonts\opensans\OpenSans-ExtraBoldItalic.ttf" />
+    <Content Include="Resources\fonts\opensans\OpenSans-Italic.ttf" />
+    <Content Include="Resources\fonts\opensans\OpenSans-Light.ttf" />
+    <Content Include="Resources\fonts\opensans\OpenSans-LightItalic.ttf" />
+    <Content Include="Resources\fonts\opensans\OpenSans-Regular.ttf" />
+    <Content Include="Resources\fonts\opensans\OpenSans-SemiBold.ttf" />
+    <Content Include="Resources\fonts\opensans\OpenSans-SemiBoldItalic.ttf" />
+    <Content Include="Resources\images\team\bryce.jpg" />
+    <Content Include="Resources\images\team\chris.jpg" />
+    <Content Include="Resources\images\team\dylan.jpg" />
+    <Content Include="Resources\images\team\team.png" />
+    <Content Include="Resources\images\team\team.xcf" />
+    <Content Include="Resources\images\team\TNAH-2.png" />
+    <Content Include="Resources\readme\logo\desktop.files.json" />
+    <Content Include="Resources\readme\logo\engine_logo_large.jpg" />
+    <Content Include="Resources\readme\logo\engine_logo_large_transparent-Border.png" />
+    <Content Include="Resources\readme\logo\engine_logo_large_transparent.png" />
+    <Content Include="Resources\readme\logo\engine_logo_small.jpg" />
+    <Content Include="Resources\readme\logo\logo.jpg" />
+    <Content Include="Resources\readme\logo\logo.png" />
+    <Content Include="Resources\shaders\default\mesh\mesh_anim_fragment.glsl" />
+    <Content Include="Resources\shaders\default\mesh\mesh_anim_vertex.glsl" />
+    <Content Include="Resources\shaders\default\mesh\mesh_fragment.glsl" />
+    <Content Include="Resources\shaders\default\mesh\mesh_vertex.glsl" />
+    <Content Include="Resources\shaders\default\physics\physics_fragment.glsl" />
+    <Content Include="Resources\shaders\default\physics\physics_vertex.glsl" />
+    <Content Include="Resources\shaders\default\skybox\skybox_fragment.glsl" />
+    <Content Include="Resources\shaders\default\skybox\skybox_vertex.glsl" />
+    <Content Include="Resources\shaders\default\terrain\terrain_fragment.glsl" />
+    <Content Include="Resources\shaders\default\terrain\terrain_vertex.glsl" />
+    <Content Include="Resources\textures\default\default_black.jpg" />
+    <Content Include="Resources\textures\default\default_missing.jpg" />
+    <Content Include="Resources\textures\default\default_white.jpg" />
+    <Content Include="Resources\textures\default\desktop.files.json" />
+    <Content Include="Resources\textures\default\engine_logo_large.jpg" />
+    <Content Include="Resources\textures\default\engine_logo_large_transparent.png" />
+    <Content Include="Resources\textures\default\engine_logo_small.jpg" />
+    <Content Include="Resources\textures\default\skybox\clouds\bluecloud_bk.jpg" />
+    <Content Include="Resources\textures\default\skybox\clouds\bluecloud_dn.jpg" />
+    <Content Include="Resources\textures\default\skybox\clouds\bluecloud_ft.jpg" />
+    <Content Include="Resources\textures\default\skybox\clouds\bluecloud_lf.jpg" />
+    <Content Include="Resources\textures\default\skybox\clouds\bluecloud_rt.jpg" />
+    <Content Include="Resources\textures\default\skybox\clouds\bluecloud_up.jpg" />
+    <Content Include="Resources\textures\default\skybox\clouds\graycloud_bk.jpg" />
+    <Content Include="Resources\textures\default\skybox\clouds\graycloud_dn.jpg" />
+    <Content Include="Resources\textures\default\skybox\clouds\graycloud_ft.jpg" />
+    <Content Include="Resources\textures\default\skybox\clouds\graycloud_lf.jpg" />
+    <Content Include="Resources\textures\default\skybox\clouds\graycloud_rt.jpg" />
+    <Content Include="Resources\textures\default\skybox\clouds\graycloud_up.jpg" />
+    <Content Include="Resources\textures\default\skybox\default_linear_skybox.ktx2" />
+    <Content Include="Resources\textures\default\skybox\default_linear_skybox.png" />
+    <Content Include="Resources\textures\default\skybox\default_linear_skybox.xcf" />
+    <Content Include="Resources\textures\default\skybox\skybox_2k.png" />
+    <Content Include="Resources\textures\default\skybox\skybox_2k.xcf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

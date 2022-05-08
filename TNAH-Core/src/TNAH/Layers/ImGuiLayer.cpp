@@ -36,7 +36,7 @@ namespace tnah {
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
 
-		io.Fonts->AddFontFromFileTTF("Resources/fonts/opensans/OpenSans-Bold.ttf", 18.0f);
+		io.Fonts->AddFontFromFileTTF("./Resources/fonts/opensans/OpenSans-Bold.ttf", 18.0f);
 		io.FontDefault = io.Fonts->AddFontFromFileTTF("Resources/fonts/opensans/OpenSans-Regular.ttf", 18.0f);
 
 		// Setup Dear ImGui style

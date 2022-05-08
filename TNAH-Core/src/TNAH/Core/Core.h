@@ -4,9 +4,9 @@
 #ifdef TNAH_PLATFORM_WINDOWS
 	#if TNAH_DYNAMIC_LINK
 		#ifdef TNAH_BUILD_DLL
-			#define TNAH_API _declspec(dllexport)
+			#define TNAH_API
 		#else
-			#define TNAH_API _declspec(dllimport)
+			#define TNAH_API
 		#endif
 	#else
 		#define TNAH_API

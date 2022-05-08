@@ -22,7 +22,6 @@
 #include "TNAH/Core/Singleton.h"
 
 #include "TNAH/Core/Timestep.h"
-#include "TNAH/Physics/PhysicsTimestep.h"
 
 #include "TNAH/Layers/Layer.h"
 #include "TNAH/Layers/ImGuiLayer.h"
@@ -45,6 +44,5 @@
 #include "TNAH/Editor/EditorUI.h"
 
 //Audio
-#include "TNAH/Audio/Audio.h"
 
 

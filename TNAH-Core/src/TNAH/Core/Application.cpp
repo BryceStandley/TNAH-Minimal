@@ -5,6 +5,8 @@
 #include "GLFW/glfw3.h"
 #include "GLFW/glfw3native.h"
 
+
+#include <filesystem>
 namespace tnah
 {
 	
@@ -18,7 +20,8 @@ namespace tnah
 		m_Window = Window::Create(WindowProps(name));
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
  
-
+		//TNAH_CORE_INFO("WorkingDir: {0}", std::filesystem::current_path().string());
+		
 		Renderer::Init();
 
 		if (m_ImGuiLayer == nullptr)

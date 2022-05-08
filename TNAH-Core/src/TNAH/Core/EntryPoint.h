@@ -31,7 +31,7 @@
 	 * @returns	Exit-code for the process - 0 for success, else an error code.
 	 */
 
-	int main(int argc, char** argv)
+	inline int main(int argc, char** argv)
 	{
 		tnah::Log::Init();
 		
