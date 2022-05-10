@@ -14,4 +14,5 @@ public:
 
 private:
 	tnah::Ref<tnah::Scene> m_Scene;
+	tnah::GameObject m_Camera;
 };

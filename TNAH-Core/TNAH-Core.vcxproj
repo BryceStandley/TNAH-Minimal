@@ -180,7 +180,7 @@
     <ClInclude Include="src\TNAH\Core\Utility.h" />
     <ClInclude Include="src\TNAH\Core\UUID.h" />
     <ClInclude Include="src\TNAH\Core\Window.h" />
-    <ClInclude Include="src\TNAH\Debug\Debug.h" />
+    <ClInclude Include="src\TNAH\Debuging\Debuging.h" />
     <ClInclude Include="src\TNAH\Editor\EditorUI.h" />
     <ClInclude Include="src\TNAH\Events\ApplicationEvent.h" />
     <ClInclude Include="src\TNAH\Events\DebugEvent.h" />

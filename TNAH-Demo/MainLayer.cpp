@@ -5,6 +5,13 @@ MainLayer::MainLayer()
 	:tnah::Layer("MainLayer")
 {
 	m_Scene = tnah::Scene::CreateEmptyScene();
+	m_Camera = m_Scene->GetSceneCamera();
+
+	m_Camera.GetComponent<tnah::CameraComponent>().ClearMode = tnah::CameraClearMode::Color;
+	m_Camera.GetComponent<tnah::CameraComponent>().ClearColor = {0.5f, 0.5f, 0.5f, 1.0f};
+
+	m_Camera.GetComponent<tnah::CameraComponent>().Camera.SetViewportSize(1280, 720);
+	
 }
 
 void MainLayer::OnAttach()
